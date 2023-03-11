@@ -5,6 +5,7 @@ const http = require('http');
 const app = express();
 const server = http.createServer(app);
 const bodyParser =require("body-parser");
+const requesthandler=require("./scripts/requestHandlers");
 
 app.use(express.static("www",{
   "index":"index.html"
@@ -16,6 +17,8 @@ app.set('view engine', '.hbs');
 app.use(bodyParser.urlencoded());
 
 /*Endpoints*/
+app.post("/Register",requesthandler.RegisterUser);
+app.post("/Login",requesthandler.Login);
 
 
 
