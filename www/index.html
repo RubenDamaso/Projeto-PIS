@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>WhatToDrink</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./style/style.css" />
+	<link rel="icon" href="./images/logo_icon.png"  sizes="16x16 32x32" type="image/png">
+  
+  </head>
+
+  <body>
+    <div class="area">
+      <section class="h-100">
+        <div class="bubbles">
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+
+          <div class="alert alert-danger" id="warning"></div>
+          <div class="alert alert-success" id="warningSucess"></div>
+          <div class="container h-100">
+            <div class="row justify-content-sm-center h-100">
+              <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+                <div class="text-center my-4">
+                  <img src="./images/logo.png" alt="logo" width="400px"/>
+                </div>
+                <div class="card shadow-lg" id="loginCard">
+                  <div class="card-body p-5">
+                    <h1 class="fs-4 card-title fw-bold mb-4" id="WelcomeHeader">Welcome!</h1>
+                    <form action="javascript:Login()" method="POST">
+                      <label class="mb-2 text-muted" for="username"
+                        >Username</label
+                      >
+                      <div class="mb-3">
+                        <div class="d-flex align-items-center">
+                          <input
+                            id="username"
+                            name="username"
+                            type="username"
+                            class="form-control"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <label class="mb-2 text-muted" for="username"
+                        >Password</label
+                      >
+                      <div class="mb-3">
+                        <div class="d-flex align-items-center">
+                          <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            class="form-control"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <button
+                          type="submit"
+                          class="defaultbutton mx-auto"
+                          id="loginbutton"
+                        >
+                          Login
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="card-footer py-3 border-0">
+                    <div class="text-center">
+                      Don't have an account?
+                      <a onclick="ShowRegisterForm()" class="text-dark"
+                        >Create One</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="card shadow-lg" id="RegisterCard">
+							<div class="card-body p-5">
+								<h1 class="fs-4 card-title fw-bold mb-4" id="WelcomeHeader">Register</h1>
+                <form action="javascript:Register()">
+									<label class="mb-2 text-muted" for="username">Username</label>
+									<div class="mb-3">
+										<div class="d-flex align-items-center">
+											<input id="usernameRegister" type="username" class="form-control" name="username">
+										</div>
+									</div>
+                  <label class="mb-2 text-muted" for="birthdate">Birth Date</label>
+                  <div class="mb-3">
+										<div class="d-flex align-items-center">
+											<input id="birthdateuser" type="date" class="form-control" name="birthdateuser">
+										</div>
+									</div>
+                    <label class="mb-2 text-muted" for="password">Password</label>
+                    <div class="mb-3"><input id="passwordRegister" type="password" class="form-control" name="password"></div>
+									<div class="d-flex align-items-center">
+										<button type="submit" class="defaultbutton mx-auto" id="loginbutton">
+											Register!
+										</button>
+									</div>
+								</form>
+							</div>
+							<div class="card-footer py-3 border-0">
+								<div class="text-center">
+									Already have an account? <a onclick="ShowLoginForm()" class="text-dark">Log in!</a>
+								</div>
+							</div>
+						</div>
+                <div class="text-center mt-5">
+                  <p class="Copyright">Copyright &copy; 2023 &mdash; WhatToDrink?</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="./scripts/user.js"></script>
+    <script src="./scripts/warnings.js"></script>
+    <script src="./scripts/Authetication.js"></script>
+  </body>
+</html>
