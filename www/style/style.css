@@ -44,6 +44,10 @@
     
     border-radius: 25px !important;;
 }
+
+#RegisterCard {
+  border-radius: 25px !important;;
+}
 .defaultbutton:hover {
     color: #ffffff;
     background-color: #FDC419;

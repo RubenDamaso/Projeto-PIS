@@ -15,6 +15,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="./style/style.css" />
 	<link rel="icon" href="./images/logo_icon.png"  sizes="16x16 32x32" type="image/png">
+  
   </head>
 
   <body>
@@ -92,19 +93,24 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="card shadow-lg" id="RegisterCard">
+                <div class="card shadow-lg" id="RegisterCard">
 							<div class="card-body p-5">
-								<h1 class="fs-4 card-title fw-bold mb-4">Welcome to <span id="TOTEMchat">TOTEMchat</span>!</h1>
-								<form action="javascript:Register()">
+								<h1 class="fs-4 card-title fw-bold mb-4" id="WelcomeHeader">Register</h1>
+                <form action="javascript:Register()">
 									<label class="mb-2 text-muted" for="username">Username</label>
 									<div class="mb-3">
 										<div class="d-flex align-items-center">
 											<input id="usernameRegister" type="username" class="form-control" name="username">
-											<input type="color" class="form-control form-control-color" id="Color"  value="#f5a442" name ="color">
 										</div>
 									</div>
-                                    <label class="mb-2 text-muted" for="password">Password</label>
-	                                <div class="mb-3"><input id="passwordRegister" type="password" class="form-control" name="password"></div>
+                  <label class="mb-2 text-muted" for="birthdate">Birth Date</label>
+                  <div class="mb-3">
+										<div class="d-flex align-items-center">
+											<input id="birthdateuser" type="date" class="form-control" name="birthdateuser">
+										</div>
+									</div>
+                    <label class="mb-2 text-muted" for="password">Password</label>
+                    <div class="mb-3"><input id="passwordRegister" type="password" class="form-control" name="password"></div>
 									<div class="d-flex align-items-center">
 										<button type="submit" class="defaultbutton mx-auto" id="loginbutton">
 											Register!
@@ -117,7 +123,7 @@
 									Already have an account? <a onclick="ShowLoginForm()" class="text-dark">Log in!</a>
 								</div>
 							</div>
-						</div> -->
+						</div>
                 <div class="text-center mt-5">
                   <p class="Copyright">Copyright &copy; 2023 &mdash; WhatToDrink?</p>
                 </div>
@@ -127,5 +133,8 @@
         </div>
       </section>
     </div>
+    <script src="./scripts/user.js"></script>
+    <script src="./scripts/warnings.js"></script>
+    <script src="./scripts/Authetication.js"></script>
   </body>
 </html>
