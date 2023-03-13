@@ -33,6 +33,7 @@ function Login(){
 
             //esconde o login card e chama a funcao de criacao da sala
             loginCard.style.display="none";
+            window.location.href("/main.html")
         }
         else{
             console.log(response.message);

@@ -193,6 +193,156 @@ body,html{
     animation-duration:10s;
     animation-delay:4s;
   }
+
+button {
+	background: transparent;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+
+:is(.sidebar, .sidebar_inner) {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.sidebar {
+	width: 72px;
+	height: 100%;
+	background: #d4a626;
+	overflow: hidden;
+	transition: width .4s;
+}
+
+body.open .sidebar {
+	width: 260px;
+}
+
+.sidebar_inner {
+	width: 300px;
+	height: inherit;
+	/*height: 100%;*/
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 1rem;
+}
+
+
+.sidebar_header {
+	display: flex;
+	align-items: center;
+	height: 72px;
+	background: rgba(0, 0, 0, .1);
+	padding: 0 1.125rem 0 0;
+}
+
+.sidebar_burger {
+	width: 72px;
+	height: 72px;
+	display: grid;
+	place-items: center;
+	color: #f9f9f9;
+	transition: .3s;
+}
+
+body.open .sidebar_burger {
+	background: url(images/icon-close.svg) no-repeat center center;
+}
+
+.sidebar_logo {
+	opacity: 0;
+	visibility: hidden;
+	transition: .3s;
+}
+.Boxes{
+  display: flex;
+  gap: 50px;
+justify-content: center;
+}
+.box_filter{
+width: 147px;
+height: 142px;
+background: #FFFFFF;
+border: 1px solid #A39B85;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+}
+
+body.open .sidebar_logo {
+	opacity: 1;
+	visibility: visible;
+}
+
+.sidebar_nav {
+	padding-bottom: 1rem;
+	flex: 1 1 auto;
+}
+
+.sidebar button {
+	display: flex;
+	align-items: center;
+	width: 72px;
+	height: 60px;
+	grid-gap: 2rem;
+	font-size: var(--step-0);
+	font-weight: 200;
+	line-height: 1;
+	padding: 0 1.5rem;
+}
+
+.sidebar button > i {
+	width: 24px;
+	height: 24px;
+  color: #f9f9f9;
+}
+
+.sidebar button > span {
+	color: #f9f9f9;
+	opacity: 0;
+	visibility: hidden;
+	transition: .2s;
+}
+
+@keyframes appear {
+	0% {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	
+	100% {
+		opacity: 1;
+		transform: translate(0, 0);
+	}
+}
+
+body.open .sidebar button > span {
+	opacity: 1;
+	visibility: visible;
+	animation: appear .2s both;
+}
+
+.copy {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	word-spacing: 1px;
+	font-weight: 300;
+}
+
+.copy p {
+	color: #f9f9f9;
+	font-size: var(--step-0);
+}
+
+
+.copy a {
+	color: #56ab2f;
+	font-size: var(--step--1);
+}
+
+  
   @keyframes rise{
     0%{
       bottom:-100px;
