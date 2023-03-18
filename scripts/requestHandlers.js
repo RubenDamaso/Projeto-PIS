@@ -1,6 +1,7 @@
 const mysql2 = require("mysql2");
 const dbconfig = require("./dbconfig.json");
 const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 /*--- Funções de Autenticação ---*/
 function RegisterUser(request,response){
@@ -37,9 +38,11 @@ function RegisterUser(request,response){
                                 message:"Conta já existe!"
                             })
                         }else{
+
                         response.json({
                             message:"Conta criada com sucesso!"
                         }) 
+                        
                         }
                     });
                     }
@@ -59,7 +62,9 @@ function Login(request , response){
         connection.query(query,function(err,rows){
             //Caso Já exista uma conta é Exibida a mensagem de Erro
             if(err || !rows.length){
-                response.json({message:"Conta não existe!" ,error: err});
+                response.json({
+                    error_message:"Conta não Existe!"
+                });
             }
             else{
                 bcrypt.compare(request.body.password, rows[0].Pass_User, function (err, result) {
@@ -68,23 +73,33 @@ function Login(request , response){
                      if (result) {
                         //Removemos a informação da password do resultado porque não pretendemos que essa informação seja disponibilizada a terceiros.
                         delete rows[0].password;
-                        //Retornamos que o erro foi null e que o utilizador foi encontrado é a primeira linha (e única) do resultado da query.
+                        
+                        //Inserimos na Sessão o Utilizador
+                        request.session.user=rows[0];
+             
                         response.json({
-                            message:"Login Efetuado com sucesso!",
-                            user: rows[0]
-                        })
+                            sucess:"sucess"
+                        });
                     }
                     //Caso result não seja true, é porque é false e como tal a password é falsa.
                     //Nesse caso retornamos erro null, mas com false como o valor da autenticação e um objeto com uma mensagem a informar o que se passou. 
-                    else {  response.json({
-                        message:"Password Errada!"
-                    })}
+                    else response.json({
+                        error_message:"Password Errada!"
+                    });
                 });    
             }
         });
-
+    
 }
 
+function requireAuth  (req, res, next) {
+    if (req.session.user) {
+      next();
+    } else {
+      res.redirect('/');
+    }
+};
 /* ----  EXPORTAR OS MÓDULOS  ---- */
 module.exports.RegisterUser=RegisterUser;
 module.exports.Login = Login;
+module.exports.requireAuth =requireAuth;
