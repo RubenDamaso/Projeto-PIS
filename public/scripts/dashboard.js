@@ -1,9 +1,39 @@
+let isAlcoolicState = true;
+let isClicked=false;
+let isClickedIngridients=false;
+
+function AlcohlicButton(){
+    isClicked=!isClicked;
+
+    let alchoolConteiner=document.getElementById("alchoolConteiner");
+
+    isClicked ? alchoolConteiner.style.backgroundColor = "#FFFFFF" :  alchoolConteiner.style.backgroundColor = "#c2c2c2";
+    changeAlchoolState();
+    console.log(isAlcoolicState);
+
+}
+
+function changeAlchoolState(){
+    isAlcoolicState ? isAlcoolicState=false : isAlcoolicState=true;
+}
 
 
+function searchCocktailbyIngridient(){
+    isClickedIngridients=!isClickedIngridients;
+    let Search=document.getElementById("Search");
+    let ingridientBox= document.getElementById("ingredientContainer")
+
+    if(Search.style.display=="none")Search.style.display="flex";
+    else Search.style.display="none"
+
+    isClickedIngridients ? ingridientBox.style.backgroundColor = "#FFFFFF" :  ingridientBox.style.backgroundColor = "#c2c2c2";
+
+}
 
 
 function getDrink(){
-    
+    console.log(isAlcoolicState);
+
     //Elementos
     let cocktailConteiner=document.getElementById("Cocktail");
     let drink_name = document.getElementById("drink_Name");
@@ -14,7 +44,7 @@ function getDrink(){
     drink_how_To_do.innerHTML=''
     drink_ingridients.innerHTML=''
 
-    params=`ingridient=${searchCocktail.value}`;
+    params=`ingridient=${searchCocktail.value}&isAlcoolic=${isAlcoolicState}`;
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/haveADrink');
@@ -22,33 +52,31 @@ function getDrink(){
     xhr.onreadystatechange = function () {
         if ((this.readyState === 4) && (this.status === 200)) {
             var response = JSON.parse(xhr.responseText);
-            console.log(response)
-            drink_name.innerHTML=response.Drink_Name;
-            drink_how_To_do.innerHTML=response.Drink_Instructions
-
-
-
-
-            var ul = document.createElement('ul');
-            ul.setAttribute('id','ingredinetList');
-    
-
-    
-            drink_ingridients.appendChild(ul);
-            
-            function renderProductList(element, index, arr) {
-                var li = document.createElement('li');
-                li.setAttribute('class','item');
-    
-                ul.appendChild(li);
-    
-                li.innerHTML=li.innerHTML + element;
+            if(response.hasOwnProperty("error_message")){
+                GenerateDangerAlert(response.error_message);
             }
-            
-            response.Drink_Ingredients.forEach(renderProductList);
+            else{
+                console.log(response)
+                drink_name.innerHTML=response.Drink_Name;
+                drink_how_To_do.innerHTML=response.Drink_Instructions
     
-            
-
+                var ul = document.createElement('ul');
+                ul.setAttribute('id','ingredinetList');
+    
+        
+                drink_ingridients.appendChild(ul);
+                
+                function renderProductList(element, index, arr) {
+                    var li = document.createElement('li');
+                    li.setAttribute('class','item');
+        
+                    ul.appendChild(li);
+        
+                    li.innerHTML=li.innerHTML + element;
+                }
+                
+                response.Drink_Ingredients.forEach(renderProductList);
+            }
 
         }
 

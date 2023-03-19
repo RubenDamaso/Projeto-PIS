@@ -34,34 +34,34 @@
           <div class="bubble"></div>
           <div class="bubble"></div>
           <div class="bubble"></div>
-
+          <div class="alert alert-danger" id="warning"></div>
+          <div class="alert alert-success" id="warningSucess"></div>
           <div class="container h-100">
             <div class="row justify-content-sm-center h-100">
                 <div class="text-center my-4">
                   <img src="./images/logo.png" alt="logo" width="400px"/>
                    <div class="Boxes">
-                  <div class="box_filter ingredient">
+                  <div class="box_filter ingredient" id="ingredientContainer" onclick="searchCocktailbyIngridient()">
                     <img src="../images/ingredient_filter.png">
                     <p class="box_filter_title">Search by ingredient</p>
                   </div>
-                  <div class="box_filter ">
+                  <div class="box_filter " id="alchoolConteiner" onclick="AlcohlicButton()">
                     <img src="../images/alcholic_filter.png">
                     <p class="box_filter_title">Filter by alcoholic</p>
                   </div>
-                  <div class="box_filter nonAlcoholic">
+                  <div class="box_filter nonAlcoholic" id="Non_alchoolConteiner">
                     <img src="../images/Nonalcoholic_filter.png">
                     <p class="box_filter_title">Filter by Non alcoholic</p>
                   </div>
                 </div>
                 <br>
                 <br>
-                <div class="Search">
+                <div class="Search" id="Search">
                     <input id="searchCocktail" type="text" class="form-control" name="searchCocktail" placeholder="Introduza os Ingredintes aqui!">
-                    <button class="SearchButton mx-auto" id="loginbutton" onclick="getDrink()">
-											Surpreende-me!
-										</button>
                 </div>
-                
+                <button class="SearchButton mx-auto" id="loginbutton" onclick="getDrink()">
+                  Surpreende-me!
+                </button>
                 <div class="Cocktail" id="Cocktail">
                   <p id="drink_Name">teste</p>
                   <p id="drink_how_To_do">teste</p>
@@ -102,6 +102,7 @@
         </div>
       </section>
     </div>
+    <script src="./scripts/warnings.js"></script>
     <script src="./scripts/dashboard.js"></script>
     <script src="./scripts/sidebar.js"></script>
   </body>
