@@ -401,3 +401,65 @@ body.open .sidebar button > span {
       transform:translateX(-200px);
     }
   }
+
+
+  #Cocktail{
+    background-color:white;
+    display: flex;
+    border-radius: 20px;
+    height: 300px;
+    width: auto;
+    margin-left: 200px;
+  }
+
+  #drink_name_drink_image {
+    /*background-color:cyan;*/
+    align-items: flex-start;
+    text-align: left;
+    /*padding-left: 40px;
+    padding-top: 30px;*/
+
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 20px;
+  }
+
+  #drink_how_To_do{
+    /*background-color: #817373;*/
+    padding-top: 10px;
+    text-align: justify;
+    font-size: 13px;
+    padding-right: 20px;
+    border-radius: 20px;
+    /*overflow-y: scroll;*/
+  }
+
+  #drink_ingridients{
+    /*background-color: #83e780;*/
+    padding-top: 10px;
+    font-size: 13px;
+    text-align: start;
+    padding-right: 50px;
+    /*max-height: 200px;
+    overflow-y: scroll;*/
+  }
+
+  #Ingredientes_text{
+    padding-top: 30px;
+  }
+
+  #Modo_de_preparacao_text{
+    padding-top: 30px;
+  }
+
+
+  .vl {
+    border-left: 2px solid black;
+    height: 250px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 10px;
+    padding-left: 10px;
+
+  }
