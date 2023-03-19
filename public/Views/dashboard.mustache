@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   </head>
 
   <body>
@@ -59,11 +61,22 @@
                 <div class="Search" id="Search">
                     <input id="searchCocktail" type="text" class="form-control" name="searchCocktail" placeholder="Introduza os Ingredintes aqui!">
                 </div>
+              <br>
                 <button class="SearchButton mx-auto" id="loginbutton" onclick="getDrink()">
                   Surpreende-me!
                 </button>
+                <div id="Loading">
+                    <lord-icon
+                    src="https://cdn.lordicon.com/szzsfswk.json"
+                    trigger="loop"
+                    colors="primary:#ffffff,secondary:#f1f1f1"
+                    style="width:250px;height:250px">
+                  </lord-icon>
+                </div>
                 <div class="Cocktail" id="Cocktail">
+                  
                   <p id="drink_Name">teste</p>
+                  <img id="drink_image" src="" width="150px" height="150px">
                   <p id="drink_how_To_do">teste</p>
                   <p id="drink_ingridients">teste</p>
                 </div>

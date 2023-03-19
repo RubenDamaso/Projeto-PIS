@@ -104,6 +104,7 @@ function Login(request , response){
 
         ingridient = request.body.ingridient;
         isAlcoolic = request.body.isAlcoolic;
+
         console.log(isAlcoolic);
         
         let AlchoolCheck;
@@ -118,7 +119,9 @@ function Login(request , response){
             console.log("Url sem ingrediente:" + " " +url)
             request(url, function (error, response, body) {
                 let drinks = JSON.parse(body);
-                id = drinks.drinks[0].idDrink;
+                const randomIndex = Math.floor(Math.random() * drinks.drinks.length);
+
+                id = drinks.drinks[randomIndex].idDrink;
                 newUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+id;
                 console.log(newUrl)
                 request(newUrl, function (error, response, body) {
@@ -209,7 +212,8 @@ function Login(request , response){
                     }
                     else{
                     let drinks = JSON.parse(body);
-                    id = drinks.drinks[0].idDrink;
+                    const randomIndex = Math.floor(Math.random() * drinks.drinks.length);
+                    id = drinks.drinks[randomIndex].idDrink;
                     newUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+id;
                     console.log(newUrl)
                     request(newUrl, function (error, response, body) {

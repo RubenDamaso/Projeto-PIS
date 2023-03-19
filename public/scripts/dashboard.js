@@ -29,23 +29,26 @@ function searchCocktailbyIngridient(){
     isClickedIngridients ? ingridientBox.style.backgroundColor = "#FFFFFF" :  ingridientBox.style.backgroundColor = "#c2c2c2";
 
 }
-
+let loading= document.getElementById("Loading");
+loading.style.display="none";
 
 function getDrink(){
     console.log(isAlcoolicState);
-
+    $(loading).show();
     //Elementos
     let cocktailConteiner=document.getElementById("Cocktail");
     let drink_name = document.getElementById("drink_Name");
     let drink_how_To_do = document.getElementById("drink_how_To_do");
     let drink_ingridients = document.getElementById("drink_ingridients");
     let searchCocktail = document.getElementById("searchCocktail");
+    let drink_image = document.getElementById("drink_image");
+
     drink_name.innerHTML='';
     drink_how_To_do.innerHTML=''
     drink_ingridients.innerHTML=''
 
     params=`ingridient=${searchCocktail.value}&isAlcoolic=${isAlcoolicState}`;
-
+    cocktailConteiner.style.display="none";
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/haveADrink');
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -57,9 +60,16 @@ function getDrink(){
             }
             else{
                 console.log(response)
+                
+    
+                setTimeout(function() { 
+                    $(loading).hide(); 
+                    $(cocktailConteiner).show(); 
+                }, 3000);
+
                 drink_name.innerHTML=response.Drink_Name;
                 drink_how_To_do.innerHTML=response.Drink_Instructions
-    
+                drink_image.src = response.Drink_Photo;
                 var ul = document.createElement('ul');
                 ul.setAttribute('id','ingredinetList');
     
