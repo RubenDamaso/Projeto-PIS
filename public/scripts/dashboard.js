@@ -31,12 +31,15 @@ function searchCocktailbyIngridient(){
 }
 let loading= document.getElementById("Loading");
 loading.style.display="none";
+let cocktailConteiner=document.getElementById("Cocktail");
+Cocktail.style.display="none";
 
 function getDrink(){
     console.log(isAlcoolicState);
     $(loading).show();
+    
     //Elementos
-    let cocktailConteiner=document.getElementById("Cocktail");
+
     let drink_name = document.getElementById("drink_Name");
     let drink_how_To_do = document.getElementById("drink_how_To_do");
     let drink_ingridients = document.getElementById("drink_ingridients");
@@ -65,6 +68,7 @@ function getDrink(){
                 setTimeout(function() { 
                     $(loading).hide(); 
                     $(cocktailConteiner).show(); 
+                    
                 }, 3000);
 
                 drink_name.innerHTML=response.Drink_Name;
