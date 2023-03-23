@@ -1,34 +1,65 @@
-let isAlcoolicState = true;
+let isAlcoolicState = false;
 let isClicked=false;
 let isClickedIngridients=false;
 
+let alchoolConteiner=document.getElementById("alchoolConteiner");
+let Non_alchoolConteiner=document.getElementById("Non_alchoolConteiner");
+let ingridientBox= document.getElementById("ingredientContainer");
+let Search=document.getElementById("Search");
+
+//funcao para bebidas alcoolicas
 function AlcohlicButton(){
-    isClicked=!isClicked;
 
-    let alchoolConteiner=document.getElementById("alchoolConteiner");
+    if(isAlcoolicState==false){
+        isAlcoolicState=true;
 
-    isClicked ? alchoolConteiner.style.backgroundColor = "#FFFFFF" :  alchoolConteiner.style.backgroundColor = "#c2c2c2";
-    changeAlchoolState();
-    console.log(isAlcoolicState);
+        if(isAlcoolicState==true){
+        alchoolConteiner.style.backgroundColor="#c2c2c2";
+        Non_alchoolConteiner.style.backgroundColor="#FFFFFF";
+        ingredientContainer.style.backgroundColor="#FFFFFF";
+        Search.style.display="none";
+        }
+    }
+}
+//funcao para bebidas nao alcoolicas
+function NonAlcohlicButton(){
+ //o estado passa de true a false e fica com as se
+    if(isAlcoolicState==true){
+        isAlcoolicState=false;
 
+        if(isAlcoolicState==false){
+        Non_alchoolConteiner.style.backgroundColor="#c2c2c2";
+        alchoolConteiner.style.backgroundColor="#FFFFFF";
+        ingredientContainer.style.backgroundColor="#FFFFFF";
+        Search.style.display="none";
+        }
+    }
 }
 
+//funcao para verificar o estado da bebida
+/*
 function changeAlchoolState(){
     isAlcoolicState ? isAlcoolicState=false : isAlcoolicState=true;
 }
+*/
 
 
 function searchCocktailbyIngridient(){
     isClickedIngridients=!isClickedIngridients;
-    let Search=document.getElementById("Search");
-    let ingridientBox= document.getElementById("ingredientContainer")
-
-    if(Search.style.display=="none")Search.style.display="flex";
-    else Search.style.display="none"
+    
+    if(Search.style.display=="none"){
+        Search.style.display="flex";
+        Non_alchoolConteiner.style.backgroundColor="#FFFFFF";
+        alchoolConteiner.style.backgroundColor="#FFFFFF";
+    }
+    else{ 
+        Search.style.display="none";
+    }
 
     isClickedIngridients ? ingridientBox.style.backgroundColor = "#FFFFFF" :  ingridientBox.style.backgroundColor = "#c2c2c2";
 
 }
+
 let loading= document.getElementById("Loading");
 loading.style.display="none";
 let cocktailConteiner=document.getElementById("Cocktail");
