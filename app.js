@@ -34,6 +34,7 @@ app.get("/", function (req, res) {
 });
 app.post("/Register",requesthandler.RegisterUser);
 app.post("/Login",requesthandler.Login);
+
 app.get('/dashboard', (req, res) => {
   if (req.session.user) {
     console.log(req.session.user.Name_User);
@@ -44,7 +45,17 @@ app.get('/dashboard', (req, res) => {
   }
 });
 
-
+app.get('/history', (req, res) => {
+  if (req.session.user) {
+    console.log(req.session.user.Name_User);
+    res.render('history',req.session.user);
+   
+  } else {
+    res.redirect('/');
+  }
+});
+app.get('/getDrinkHistory',requesthandler.getDrinkHistory);
+app.post("/getDrinkByID",requesthandler.getDrinkByID)
 app.post("/haveADrink",requesthandler.letsGetADrink);
 
 app.get('/logout', (req, res) => {

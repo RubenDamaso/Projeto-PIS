@@ -481,3 +481,34 @@ body.open .sidebar button > span {
     padding-left: 10px;
 
   }
+
+  .table{
+    background-color: white;
+    border-radius: 9px;
+    align-self: center;
+    width: 420px;
+  }
+ 
+  .table tbody tr :hover{
+    background-color: rgb(226, 219, 219);
+    cursor: pointer;
+  }
+  .History{
+    display: flex;
+    margin: auto;
+   justify-content: center;
+    max-height: 327px;
+    border-radius: 12px;
+
+  }
+
+  .History :first-child{
+    overflow-x: hidden !important;
+  }
+  .table.responsive{
+    width: 50%;
+    border-radius: 12px;
+ 
+    overflow-y: scroll !important;
+  }
+

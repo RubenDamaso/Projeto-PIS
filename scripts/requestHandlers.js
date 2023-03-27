@@ -93,6 +93,26 @@ function Login(request , response){
     
 }
 
+
+function getDrinkHistory(request , response){
+        id_user=request.session.user.ID_User;
+       var connection = mysql2.createConnection(dbconfig);
+       connection.connect();
+       
+       var query= mysql2.format(`Select * from Cocktail_User where id_user = ?`,[id_user]);
+       connection.query(query,function(err,rows){
+
+           if(err || !rows.length){
+               response.json({
+                   error_message:"Sem bebidas!"
+               });
+           }
+           else{
+            response.json({message: "success", drinks: rows });
+           }
+       });
+}
+
 /**
  * Função para procura e retornar Bebidas
  * @param {*} request 
@@ -104,7 +124,8 @@ function Login(request , response){
 
         ingridient = request.body.ingridient;
         isAlcoolic = request.body.isAlcoolic;
-
+        id_user=request.session.user.ID_User;
+      
         console.log(isAlcoolic);
         
         let AlchoolCheck;
@@ -168,11 +189,26 @@ function Login(request , response){
 
                         console.log(result);
 
-                        resposta.json({
-                            Drink_Name:Cocktail_Name,
-                            Drink_Ingredients: Coktail_PT_ingredints,
-                            Drink_Instructions:Cocktail_PT_strInstructions,
-                            Drink_Photo:Cocktail_thumb,
+                        
+                        //Adiciona Bebida ao Historico do User
+                        var connection = mysql2.createConnection(dbconfig);
+
+                        connection.connect();
+                
+                        var query= mysql2.format(`insert into Cocktail_User(id_user,id_Cocktail,Name_Cocktail) values(?,?,?)`,[id_user,id,Cocktail_Name]);
+                        connection.query(query,function(err){
+                            if(err){
+                                resposta.json({
+                                    error_message:"Não foi encontrada nenhuma bebida tente novamente"
+                                });
+                            }else{
+                                resposta.json({
+                                    Drink_Name:Cocktail_Name,
+                                    Drink_Ingredients: Coktail_PT_ingredints,
+                                    Drink_Instructions:Cocktail_PT_strInstructions,
+                                    Drink_Photo:Cocktail_thumb,
+                                });
+                            }
                         });
 
                     }).catch(err => {
@@ -260,12 +296,26 @@ function Login(request , response){
     
                             console.log(result);
     
-                            resposta.json({
-                                Drink_Name:Cocktail_Name,
-                                Drink_Ingredients: Coktail_PT_ingredints,
-                                Drink_Instructions:Cocktail_PT_strInstructions,
-                                Drink_Photo:Cocktail_thumb,
-                            });
+                                //Adiciona Bebida ao Historico do User
+                        var connection = mysql2.createConnection(dbconfig);
+
+                        connection.connect();
+                
+                        var query= mysql2.format(`insert into Cocktail_User(id_user,id_Cocktail,Name_Cocktail) values(?,?,?)`,[id_user,id,Cocktail_Name]);
+                        connection.query(query,function(err){
+                            if(err){
+                                resposta.json({
+                                    error_message:"Não foi encontrada nenhuma bebida tente novamente"
+                                });
+                            }else{
+                                resposta.json({
+                                    Drink_Name:Cocktail_Name,
+                                    Drink_Ingredients: Coktail_PT_ingredints,
+                                    Drink_Instructions:Cocktail_PT_strInstructions,
+                                    Drink_Photo:Cocktail_thumb,
+                                });
+                            }
+                        });
     
                         }).catch(err => {
                             console.error(err);
@@ -283,7 +333,81 @@ function Login(request , response){
             
      
     }
+
+
+
+
+
+    function getDrinkByID(request , resposta){
+            var id = request.body.id
+            newUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i="+id;
+            console.log(newUrl)
+            var request = require('request');
+            request(newUrl, function (error, response, body) {
+                let fullDrink = JSON.parse(body);
+                console.log(fullDrink);
+                
+                Cocktail_EN_strInstructions = fullDrink.drinks[0].strInstructions;
+                Cocktail_Name=  fullDrink.drinks[0].strDrink;
+                Cocktail_thumb=fullDrink.drinks[0].strDrinkThumb
+
+                let Coktail_EN_ingredints=[
+                    fullDrink.drinks[0].strIngredient1,
+                    fullDrink.drinks[0].strIngredient2,
+                    fullDrink.drinks[0].strIngredient3,
+                    fullDrink.drinks[0].strIngredient4,
+                    fullDrink.drinks[0].strIngredient5,
+                    fullDrink.drinks[0].strIngredient6,
+                    fullDrink.drinks[0].strIngredient7,
+                    fullDrink.drinks[0].strIngredient8,
+                    fullDrink.drinks[0].strIngredient9,
+                    fullDrink.drinks[0].strIngredient10,
+                    fullDrink.drinks[0].strIngredient11,
+                    fullDrink.drinks[0].strIngredient12,
+                    fullDrink.drinks[0].strIngredient13,
+                    fullDrink.drinks[0].strIngredient14,
+                    fullDrink.drinks[0].strIngredient15,
+                ]
+                Coktail_EN_ingredints = Coktail_EN_ingredints.filter(elements => {
+                    return elements !== null;
+                });
+
+                let FULLSTRING_Coktail_EN_ingredints ="";
+                FULLSTRING_Coktail_EN_ingredints=Coktail_EN_ingredints.join(",");
+                console.log(FULLSTRING_Coktail_EN_ingredints);
+                
+                let toTranslate = FULLSTRING_Coktail_EN_ingredints+"|"+Cocktail_EN_strInstructions
+                console.log(toTranslate);
+                translatte(toTranslate, {to: 'pt'}).then(res => {
+                    let result=res.text.split("|");
+                    
+                    let Coktail_PT_ingredints = result[0].split(",");
+                    let Cocktail_PT_strInstructions=result[1];
+                    
+
+                    console.log(result);
+
+                    resposta.json({
+                        Drink_Name:Cocktail_Name,
+                        Drink_Ingredients: Coktail_PT_ingredints,
+                        Drink_Instructions:Cocktail_PT_strInstructions,
+                        Drink_Photo:Cocktail_thumb,
+                    });
+              
+
+                }).catch(err => {
+                    console.error(err);
+                });
+
+                
+            });
+     
+    }
+
+
 /* ----  EXPORTAR OS MÓDULOS  ---- */
 module.exports.RegisterUser=RegisterUser;
 module.exports.Login = Login;
 module.exports.letsGetADrink =letsGetADrink;
+module.exports.getDrinkByID = getDrinkByID;
+module.exports.getDrinkHistory = getDrinkHistory;

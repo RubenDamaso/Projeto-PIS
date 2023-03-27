@@ -91,6 +91,7 @@ function getDrink(){
             var response = JSON.parse(xhr.responseText);
             if(response.hasOwnProperty("error_message")){
                 GenerateDangerAlert(response.error_message);
+                $(loading).hide(); 
             }
             else{
                 console.log(response)
@@ -130,7 +131,9 @@ function getDrink(){
 
   
 }
-
+function GoToHistory(){
+    window.location.replace("/history");
+}
 function logout(){
     window.location.replace("/logout");
 }
